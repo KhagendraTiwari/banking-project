@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-1"  # Update the region if necessary
+  region = "ap-south-1"  # Update the region if necessary
 }
 
 resource "aws_instance" "testserver" {
