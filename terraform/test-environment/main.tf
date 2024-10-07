@@ -2,7 +2,7 @@ provider "aws" {
   region = "us-east-1"
 }
 
-# Data source to check if the instance already exists
+# Data source to check if the test instance already exists
 data "aws_instance" "existing_testserver" {
   # Use a filter to find an existing instance by its name tag
   filter {
@@ -23,5 +23,5 @@ resource "aws_instance" "testserver" {
 }
 
 output "testserver_public_ip" {
-  value = aws_instance.testserver[0].public_ip  # Access the public IP of the instance
+  value = length(aws_instance.testserver) > 0 ? aws_instance.testserver[0].public_ip : "No instance created"  # Handle case when instance does not exist
 }
