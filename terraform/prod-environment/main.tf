@@ -23,5 +23,5 @@ resource "aws_instance" "prodserver" {
 }
 
 output "prodserver_public_ip" {
-  value = aws_instance.prodserver[0].public_ip  # Access the public IP of the instance
+  value = length(aws_instance.prodserver) > 0 ? aws_instance.prodserver[0].public_ip : "No instance created"  # Handle case when instance does not exist
 }
