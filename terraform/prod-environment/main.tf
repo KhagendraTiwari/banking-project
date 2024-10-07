@@ -4,10 +4,9 @@ provider "aws" {
 
 # Data source to check if the production instance already exists
 data "aws_instance" "existing_prodserver" {
-  # Use a filter to find an existing instance by its name tag
   filter {
     name   = "tag:Name"
-    values = ["prodserver"]
+    values = ["prodserver"]  # Ensure this matches the instance's name tag
   }
 }
 
@@ -18,10 +17,10 @@ resource "aws_instance" "prodserver" {
   key_name      = "ktkey"                   # Replace with your key pair name
 
   tags = {
-    Name = "prodserver"
+    Name = "prodserver"  # Ensure the tag matches the data source
   }
 }
 
 output "prodserver_public_ip" {
-  value = length(aws_instance.prodserver) > 0 ? aws_instance.prodserver[0].public_ip : "No instance created"  # Handle case when instance does not exist
+  value = length(aws_instance.prodserver) > 0 ? aws_instance.prodserver[0].public_ip : "No instance created"
 }
