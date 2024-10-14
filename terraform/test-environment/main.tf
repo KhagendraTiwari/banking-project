@@ -20,5 +20,5 @@ resource "aws_instance" "testserver" {
   }
 }
 output "testserver_ip" {
-  value = aws_instance.testserver.public_ip
+  value = aws_instance.testserver[0].public_ip  // Access the first instance's public IP
 }
